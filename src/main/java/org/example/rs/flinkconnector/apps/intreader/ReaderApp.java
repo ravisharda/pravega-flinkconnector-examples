@@ -1,17 +1,21 @@
-package org.example.rs.flinkconnector.app1;
+package org.example.rs.flinkconnector.apps.intreader;
 
 import io.pravega.client.stream.impl.DefaultCredentials;
 import io.pravega.connectors.flink.FlinkPravegaReader;
 import io.pravega.connectors.flink.PravegaConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.example.rs.flinkconnector.common.serializers.flink.IntegerDeserializationSchema;
 
-public class Reader {
+@Slf4j
+public class ReaderApp {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+
+        // Initialize the Flink execution environment
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-
         env.setParallelism(1);
         env.enableCheckpointing(100);
         env.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, 0L));
@@ -35,7 +39,14 @@ public class Reader {
                 .withPravegaConfig(conf)
                 .withDeserializationSchema(new IntegerDeserializationSchema())
                 .build();
+        log.info("Done creating Flink Pravega Reader (Source)");
 
+        DataStreamSource streamSource = env.addSource(pravegaSource);
+        streamSource.filter(i -> true)
+                .print();
 
+        env.execute();
+
+        log.info("Exiting reader...");
     }
 }

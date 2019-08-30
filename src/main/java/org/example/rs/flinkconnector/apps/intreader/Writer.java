@@ -1,4 +1,4 @@
-package org.example.rs.flinkconnector.app1;
+package org.example.rs.flinkconnector.apps.intreader;
 
 import io.pravega.client.ClientConfig;
 import io.pravega.client.ClientFactory;
@@ -30,10 +30,6 @@ public class Writer {
         setup.init();
 
         @Cleanup
-        ClientFactory clientFactory = ClientFactory.withScope(Constants.SCOPE, clientConfig);
-        log.info("Done creating a client factory with the specified scope and client config.");
-
-        @Cleanup
         EventStreamWriter<Integer> writer = EventStreamClientFactory.withScope(Constants.SCOPE, clientConfig)
                 .createEventWriter(Constants.STREAM_NAME,
                         new IntegerSerializer(),
@@ -41,9 +37,8 @@ public class Writer {
         log.info("Done creating a writer.");
 
         for (int i = 0; i < 5; i++) {
-            String message = "Message: " + i;
             writer.writeEvent(String.valueOf(i), i).join();
-            log.info("Done writing an event: [" + message + "].");
+            log.info("Done writing an event: [" + i + "].");
 
             Thread.sleep(2*1000);
         }

@@ -1,4 +1,4 @@
-package org.example.rs.flinkconnector.app1;
+package org.example.rs.flinkconnector.apps.intreader;
 
 import java.net.URI;
 
