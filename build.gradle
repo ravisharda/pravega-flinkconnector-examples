@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example.rs.flinkconnector'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+allprojects {
+    apply plugin: "idea"
+}
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    compile "io.pravega:pravega-client:${pravegaVersion}+",
+            "io.pravega:controller-api:${pravegaVersion}+",
+            "io.pravega:pravega-connectors-flink_2.12:${pravegaFlinkConnectorVersion}",
+            "org.apache.flink:flink-streaming-java_2.12:${flinkVersion}",
+            "org.apache.flink:flink-java:${flinkVersion}",
+            "io.pravega:pravega-common:${pravegaVersion}+",
+            "io.pravega:pravega-standalone:${pravegaVersion}+",
+            "commons-cli:commons-cli:${commonsCLIVersion}",
+            "org.slf4j:slf4j-api:${slf4jApiVersion}",
+            "ch.qos.logback:logback-classic:${logbackVersion}",
+            "org.glassfish.jersey.core:jersey-client:${jerseyClientVersion}",
+            "javax.activation:activation:1.1.1",
+
+            "junit:junit:${junitVersion}"
+}

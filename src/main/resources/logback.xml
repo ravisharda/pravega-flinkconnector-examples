@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <!-- Insert the current time formatted as "yyyyMMdd'T'HHmmss" under
+    the key "bySecond" into the logger context. This value will be
+    available to all subsequent configuration elements. -->
+    <timestamp key="bySecond" datePattern="HHmmss-yyyyMMdd"/>
+
+    <logger name="org.example.pravega" level="DEBUG"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M\(%line\) - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- Creates a new file for each run. -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/${bySecond}.log</file>
+        <append>true</append>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M\(%line\) - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <logger name="org.example.rs.flinkconnector" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="io.netty" level="WARN"/>
+    <logger name="io.grpc" level="WARN"/>
+    <logger name="org.apache.zookeeper" level="WARN"/>
+    <logger name="org.apache.curator" level="WARN"/>
+    <logger name="io.pravega" level="WARN"/>
+
+</configuration>
