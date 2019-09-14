@@ -9,3 +9,5 @@ out/
 *.iml
 *.iws
 out/
+logs/
+gradle/
