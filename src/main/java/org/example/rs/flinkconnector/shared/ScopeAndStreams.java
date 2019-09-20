@@ -1,8 +1,8 @@
 package org.example.rs.flinkconnector.shared;
 
-import io.micrometer.shaded.reactor.util.annotation.NonNull;
 import io.pravega.client.ClientConfig;
 import io.pravega.client.admin.StreamManager;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,14 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ScopeAndStreams implements AutoCloseable {
 
-    @NonNull
     private final String scope;
 
-    @NonNull
-    private final ClientConfig clientConfig;
+    private @NonNull final ClientConfig clientConfig;
 
-    @NonNull
-    private final List<StreamConfig> streamConfigs;
+    private @NonNull final List<StreamConfig> streamConfigs;
 
     private StreamManager streamManager;
 

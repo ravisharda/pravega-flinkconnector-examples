@@ -22,18 +22,15 @@ dependencies {
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-    compile "io.pravega:pravega-client:${pravegaVersion}+",
-            "io.pravega:controller-api:${pravegaVersion}+",
-            "io.pravega:pravega-connectors-flink_2.12:${pravegaFlinkConnectorVersion}",
+    compile "io.pravega:pravega-connectors-flink_2.12:${pravegaFlinkConnectorVersion}",
             "org.apache.flink:flink-streaming-java_2.12:${flinkVersion}",
             "org.apache.flink:flink-java:${flinkVersion}",
-            "io.pravega:pravega-common:${pravegaVersion}+",
-            "io.pravega:pravega-standalone:${pravegaVersion}+",
             "commons-cli:commons-cli:${commonsCLIVersion}",
             "org.slf4j:slf4j-api:${slf4jApiVersion}",
             "ch.qos.logback:logback-classic:${logbackVersion}",
             "org.glassfish.jersey.core:jersey-client:${jerseyClientVersion}",
             "javax.activation:activation:1.1.1",
-
+            "com.fasterxml.jackson.core:jackson-databind:2.9.9.3",
+            "org.apache.flink:flink-connector-elasticsearch6_2.11:1.6.0"
             "junit:junit:${junitVersion}"
 }
